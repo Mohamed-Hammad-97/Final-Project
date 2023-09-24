@@ -1,0 +1,29 @@
+<div class="container my-5">
+    <h2 class="mb-3">Cart Details:</h2>
+    <div class="bg-main-light" *ngIf="cartDetails?.data">
+        <div class="d-flex justify-content-between px-3 py-5">
+            <h4>Total items: <span class="text-main">{{cartDetails.data.products.length}}</span></h4>
+            <h4>Total Price: <span class="text-main">{{cartDetails.data.totalCartPrice}}</span></h4>
+        </div>
+        <div class="row mb-4 border-bottom" *ngFor="let product of cartDetails.data.products | filterProducts">
+            <div class="col-md-1">
+                <img [src]="product.product.imageCover" class="w-100" alt="">
+            </div>
+            <div class="col-md-9">
+                <div class="item">
+                    <h4>{{product.product.title}}</h4>
+                    <p class="text-main">{{product.product.category.name}}</p>
+                    <div class="d-flex align-items-center mb-3">
+                        <p class="text-main mb-0">{{product.price}} EGP</p>
+                        <button (click)="removeProduct(product.product.id)" class="btn p-0 text-danger ms-3"> <i class="fa fa-regular fa-trash-can"></i> Remove</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-update" (click)="updataProductCount(product.count-1 , product.product.id)">-</button>
+                <span class="mx-2">{{product.count}}</span>
+                <button class="btn btn-update" (click)="updataProductCount(product.count+1 , product.product.id)">+</button>
+            </div>
+        </div>
+    </div>
+</div>
